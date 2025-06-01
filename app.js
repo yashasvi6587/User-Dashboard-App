@@ -176,4 +176,4 @@ app.post("/upload", loginfirst , upload.single("image") , async(req,res) => {
     res.redirect("/profile")
 })
 
-app.listen(3001);
+app.listen(3000);
