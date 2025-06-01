@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login Account</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #1e3a8a, #9333ea);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .tilt:hover {
+      transform: rotateX(5deg) rotateY(5deg);
+      transition: transform 0.3s ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+
+  <div class="glass p-10 rounded-3xl shadow-2xl tilt transform transition-all duration-500 max-w-md w-full">
+    <form action="/login" method="post" class="space-y-6">
+      <h3 class="text-3xl font-bold text-white text-center mb-6">Login to Your Account</h3>
+
+      <input type="email" name="email" placeholder="Email"
+        class="w-full p-3 rounded-xl bg-white/30 text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-indigo-300"
+        required/>
+
+      <input type="password" name="password" placeholder="Password"
+        class="w-full p-3 rounded-xl bg-white/30 text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-indigo-300"
+        required/>
+
+      <input type="submit" value="Login"
+        class="w-full bg-gradient-to-r from-indigo-500 to-purple-500 text-white py-3 rounded-xl font-semibold hover:scale-105 hover:from-purple-500 hover:to-indigo-500 transition-transform duration-300 shadow-md"/>
+    </form>
+
+    <p class="mt-6 text-white text-center text-sm">
+      New user?
+      <a href="/" class="text-indigo-200 hover:text-white font-semibold underline transition duration-200">Register here</a>
+    </p>
+  </div>
+
+  <script>
+    // Get URL parameters
+    const params = new URLSearchParams(window.location.search);
+    const error = params.get('error');
+
+    // Show pop-ups based on error value
+    if (error === 'email') {
+      alert('Email is incorrect');
+    } else if (error === 'password') {
+      alert('Password is incorrect');
+    }
+  </script>
+</body>
+</html>

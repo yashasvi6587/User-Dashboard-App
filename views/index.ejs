@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Account</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .tilt:hover {
+      transform: rotateX(5deg) rotateY(5deg);
+      transition: transform 0.3s ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-4">
+  <div class="glass p-10 rounded-3xl shadow-2xl tilt transform transition-all duration-500 max-w-md w-full">
+    <form action="/register" method="post" class="space-y-5">
+      <h3 class="text-3xl font-bold text-white text-center mb-6">Create Account</h3>
+      
+      <input type="text" name="username" placeholder="Username"
+        class="w-full p-3 rounded-xl bg-white/30 text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-purple-300" />
+
+      <input type="text" name="name" placeholder="Full Name"
+        class="w-full p-3 rounded-xl bg-white/30 text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-purple-300" />
+
+      <input type="email" name="email" placeholder="Email"
+        class="w-full p-3 rounded-xl bg-white/30 text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-purple-300" />
+
+      <input type="password" name="password" placeholder="Password"
+        class="w-full p-3 rounded-xl bg-white/30 text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-purple-300" />
+
+      <input type="number" name="age" placeholder="Age"
+        class="w-full p-3 rounded-xl bg-white/30 text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-purple-300" />
+      
+      <input type="submit" value="Create Account"
+        class="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-xl font-semibold hover:scale-105 hover:from-pink-500 hover:to-purple-500 transition-transform duration-300 shadow-md" />
+    </form>
+
+    <p class="mt-6 text-white text-center text-sm">
+      Already have an account?
+      <a href="/login" class="text-pink-200 hover:text-white font-semibold underline transition duration-200">Log in</a>
+    </p>
+  </div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Upload Profile Photo</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #4f46e5, #ec4899);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .glass {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .tilt:hover {
+      transform: rotateX(4deg) rotateY(4deg);
+      transition: transform 0.3s ease;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-6">
+
+  <div class="glass rounded-3xl p-10 w-full max-w-lg shadow-2xl text-white tilt">
+    <form action="/upload" method="post" enctype="multipart/form-data" autocomplete="off" class="space-y-6">
+      <h3 class="text-3xl font-bold text-center mb-4">Upload Profile Photo</h3>
+
+      <input type="file" name="image" 
+        class="w-full text-white file:bg-indigo-500 file:border-0 file:px-4 file:py-2 file:rounded-xl file:text-white file:cursor-pointer bg-white/30 rounded-xl p-2 focus:outline-none focus:ring-4 focus:ring-pink-300"/>
+
+      <input type="submit" value="Upload File"
+        class="w-full bg-gradient-to-r from-indigo-500 to-pink-500 text-white py-3 rounded-xl font-semibold hover:scale-105 hover:from-pink-500 hover:to-indigo-500 transition-transform duration-300 shadow-md cursor-pointer"/>
+    </form>
+  </div>
+
+</body>
+</html>

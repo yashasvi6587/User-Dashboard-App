@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #4f46e5, #ec4899);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .glass {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .tilt:hover {
+      transform: rotateX(4deg) rotateY(4deg);
+      transition: transform 0.3s ease;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen flex flex-col items-center py-10 px-4">
+  <!-- Logout -->
+  <div class="w-full max-w-5xl flex justify-end mb-6">
+    <a href="/logout" class="text-white font-medium hover:underline">Logout</a>
+  </div>
+
+  <!-- Profile Section -->
+  <div class="glass rounded-3xl p-8 w-full max-w-5xl shadow-2xl tilt text-white mb-10">
+    <div class="flex items-center gap-6 mb-4">
+      <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-white shadow-lg">
+        <img src="/images/uploads/<%= user.profilepic %>" class="w-full h-full object-cover" />
+      </div>
+      <div>
+        <h1 class="text-3xl font-bold">Hello, <%= user.name %> 👋</h1>
+        <a href="/profile/upload" class="text-sm text-purple-200 hover:underline">Upload Profile Photo</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Create Post -->
+  <div class="glass rounded-3xl p-8 w-full max-w-3xl shadow-xl text-white tilt mb-10">
+    <h2 class="text-2xl font-semibold mb-4">Create a New Post</h2>
+    <form action="/post" method="post" class="space-y-4">
+      <textarea name="content" placeholder="What's up on your mind?"
+        class="w-full p-4 rounded-xl bg-white/30 text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-pink-300 resize-none min-h-[120px]"></textarea>
+      <input type="submit" value="Create New Task"
+        class="w-full bg-gradient-to-r from-indigo-500 to-pink-500 py-3 rounded-xl font-bold text-white hover:scale-105 transition-transform duration-300 shadow-md cursor-pointer" />
+    </form>
+  </div>
+
+  <!-- User Posts -->
+  <div class="glass rounded-3xl p-8 w-full max-w-5xl shadow-xl text-white tilt">
+    <h3 class="text-2xl font-bold mb-6">Your Posts</h3>
+    <div class="space-y-6">
+      <% user.posts.reverse().forEach(function(post) { %>
+        <div class="bg-white/20 p-6 rounded-xl shadow-lg hover:scale-[1.01] transition-transform duration-200">
+          <h1 class="font-semibold text-xl mb-2">@<%= user.username %>
+          </h1>
+          <p class="text-white mb-2">
+            <%= post.content %>
+          </p>
+          <!-- <small class="text-pink-200">
+            <%= post.likes.length %> likes
+          </small> -->
+          <div class="mt-3 space-x-4">
+            <button class="like-btn text-indigo-200 hover:underline" data-id="<%= post._id %>"
+              data-liked="<%= post.likes.includes(user._id) %>">
+              <%= post.likes.includes(user._id) ? "Unlike" : "Like" %>
+            </button>
+            <small class="like-count text-pink-200 ml-2">
+              <%= post.likes.length %> likes
+            </small>
+
+
+            <a href="/edit/<%= post._id %>" class="text-indigo-200 hover:underline">Edit</a>
+          </div>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll(".like-btn").forEach(button => {
+      button.addEventListener("click", async () => {
+        const postId = button.getAttribute("data-id");
+        const liked = button.getAttribute("data-liked") === "true";
+
+        try {
+          const res = await fetch(`/like/${postId}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+
+          const data = await res.json();
+
+          if (res.ok) {
+            button.setAttribute("data-liked", data.liked);
+            button.textContent = data.liked ? "Unlike" : "Like";
+            button.nextElementSibling.textContent = `${data.likeCount} likes`;
+          } else {
+            alert("Failed to like post.");
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Something went wrong.");
+        }
+      });
+    });
+  </script>
+
+
+</body>
+
+</html>

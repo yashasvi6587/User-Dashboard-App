@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Edit Post</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      body {
+        background: linear-gradient(135deg, #7e22ce, #f472b6);
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .glass {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+      }
+      .tilt:hover {
+        transform: rotateX(4deg) rotateY(4deg);
+        transition: transform 0.3s ease;
+      }
+    </style>
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-6">
+
+    <div class="glass p-10 rounded-3xl w-full max-w-2xl shadow-2xl text-white tilt">
+      <h1 class="text-3xl font-bold text-center mb-6">Edit Your Post</h1>
+
+      <form action="/update/<%= post._id %>" method="post" class="space-y-6">
+        <textarea
+          name="content"
+          placeholder="What's up on your mind?"
+          class="w-full min-h-[150px] p-4 rounded-xl bg-white/30 text-white placeholder-white focus:outline-none focus:ring-4 focus:ring-pink-300 resize-none"
+        ><%= post.content %></textarea>
+
+        <input
+          type="submit"
+          value="Update Task"
+          class="w-full bg-gradient-to-r from-purple-600 to-pink-500 py-3 rounded-xl font-semibold text-white shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
+        />
+      </form>
+    </div>
+
+  </body>
+</html>
