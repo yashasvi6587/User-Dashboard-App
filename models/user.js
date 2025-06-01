@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-mongoose.connect("mongodb://localhost:27017/lecture17")
+mongoose.connect(process.env.MONGO_URI)
 
 const UserSchema = mongoose.Schema({
     username:String,
